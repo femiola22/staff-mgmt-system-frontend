@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EmployeeService from "../services/EmployeeService";
-import Employee from "./Employee";
+import StaffService from "../services/StaffService";
+import Staff from "./Staff";
 
-const EmployeeList = () => {
+const StaffList = () => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
-  const [employees, setEmployees] = useState(null);
+  const [staffs, setStaffs] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await EmployeeService.getEmployees();
-        setEmployees(response.data);
+        const response = await StaffService.getStaffs();
+        setStaffs(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -23,12 +23,12 @@ const EmployeeList = () => {
     fetchData();
   }, []);
 
-  const deleteEmployee = (e, id) => {
+  const deleteStaff = (e, id) => {
     e.preventDefault();
-    EmployeeService.deleteEmployee(id).then((res) => {
-      if (employees) {
-        setEmployees((prevElement) => {
-          return prevElement.filter((employee) => employee.id !== id);
+    StaffService.deleteStaff(id).then((res) => {
+      if (staffs) {
+        setStaffs((prevElement) => {
+          return prevElement.filter((staff) => staff.id !== id);
         });
       }
     });
@@ -38,10 +38,10 @@ const EmployeeList = () => {
     <div className="container mx-auto my-8">
       <div className="h-12">
         <button
-          onClick={() => navigate("/addEmployee")}
+          onClick={() => navigate("/addStaff")}
           className="rounded bg-slate-600 text-white px-6 py-2 font-semibold"
         >
-          Add Employee
+          Add Staff
         </button>
       </div>
       <div className="flex shadow border-b">
@@ -64,12 +64,12 @@ const EmployeeList = () => {
           </thead>
           {!loading && (
             <tbody>
-              {employees.map((employee) => (
-                <Employee
-                  employee={employee}
-                  deleteEmployee={deleteEmployee}
-                  key={employee.id}
-                ></Employee>
+              {staffs.map((staff) => (
+                <Staff
+                  staff={staff}
+                  deleteStaff={deleteStaff}
+                  key={staff.id}
+                ></Staff>
               ))}
             </tbody>
           )}
@@ -79,4 +79,4 @@ const EmployeeList = () => {
   );
 };
 
-export default EmployeeList;
+export default StaffList;

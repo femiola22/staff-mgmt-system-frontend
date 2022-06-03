@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import AddEmployee from "./components/AddEmployee";
-import EmployeeList from "./components/EmployeeList";
+import AddStaff from "./components/AddStaff";
+import StaffList from "./components/StaffList";
 import Navbar from "./components/Navbar";
-import UpdateEmployee from "./components/UpdateEmployee";
+import UpdateStaff from "./components/UpdateStaff";
 
 function App() {
   return (
@@ -11,11 +11,11 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route index element={<EmployeeList />} />
-          <Route path="/" element={<EmployeeList />}></Route>
-          <Route path="/employeeList" element={<EmployeeList />} />
-          <Route path="/addEmployee" element={<AddEmployee />} />
-          <Route path="/editEmployee/:id" element={<UpdateEmployee />} />
+          <Route index element={<StaffList />} />
+          <Route path="/" element={<StaffList />}></Route>
+          <Route path="/staffList" element={<StaffList />} />
+          <Route path="/addStaff" element={<AddStaff />} />
+          <Route path="/editStaff/:id" element={<UpdateStaff />} />
         </Routes>
       </BrowserRouter>
     </>
